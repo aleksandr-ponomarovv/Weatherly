@@ -8,7 +8,7 @@
 import CoreLocation
 
 protocol MainInteractorType {
-    var locationName: String? { get }
+    var selectedCity: City? { get }
     var current: CurrentModel? { get }
     var hourCellModels: [HourCellModel] { get }
     var dayCellModels: [DayCellModel] { get }
@@ -23,10 +23,13 @@ class MainInteractor: MainInteractorType {
         
     private let weatherService = WeatherService()
     private let locationManager = LocationManager.shared
+    private let realmManager = RealmManager.shared
     private var hourlyEntity: HourlyEntity?
-    
+        
     // MARK: - Protocol property
-    var locationName: String?
+    var selectedCity: City? {
+        return realmManager.getObject(primaryKey: RealmKeyConstants.selectedCityId)
+    }
     
     var current: CurrentModel? {
         hourlyEntity?.current
@@ -79,13 +82,14 @@ class MainInteractor: MainInteractorType {
 // MARK: - Private methods
 private extension MainInteractor {
     func getPlaceName(lat: String, lon: String) {
-        guard let lat = lat.toDouble(), let lon = lon.toDouble() else { return }
+        guard let latDouble = lat.toDouble(), let lonDouble = lon.toDouble() else { return }
         
-        locationManager.getPlaceName(lat: lat, lon: lon) { [weak self] name in
+        locationManager.getPlaceName(lat: latDouble, lon: lonDouble) { [weak self] name in
             guard let self = self,
                   let name = name else { return }
             
-            self.locationName = name
+            let city = City(name: name, lat: lat, lon: lon)
+            self.realmManager.addOrUpdate(object: city)
         }
     }
 }

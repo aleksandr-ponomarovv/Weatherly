@@ -7,11 +7,6 @@
 
 import UIKit
 
-// MARK: - Coord
-struct Coord: Codable {
-    let lat, lon: Double
-}
-
 // MARK: - List
 struct List: Codable {
     let dateTime: Int

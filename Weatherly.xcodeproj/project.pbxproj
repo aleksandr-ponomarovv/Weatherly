@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1F1A67C2288E824E0023E669 /* RealmManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1A67C1288E824E0023E669 /* RealmManager.swift */; };
+		1F1A67C4288E899B0023E669 /* RealmKeyConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1A67C3288E899B0023E669 /* RealmKeyConstants.swift */; };
 		1F3B31AC288E184800866FB4 /* ua-cities.json in Resources */ = {isa = PBXBuildFile; fileRef = 1F3B31AB288E184800866FB4 /* ua-cities.json */; };
 		1F3B31AE288E189700866FB4 /* CountryEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F3B31AD288E189700866FB4 /* CountryEntity.swift */; };
 		1F3B31B6288E1AE100866FB4 /* SearchPlacePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F3B31AF288E1AE100866FB4 /* SearchPlacePresenter.swift */; };
@@ -65,6 +67,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1F1A67C1288E824E0023E669 /* RealmManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmManager.swift; sourceTree = "<group>"; };
+		1F1A67C3288E899B0023E669 /* RealmKeyConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmKeyConstants.swift; sourceTree = "<group>"; };
 		1F3B31AB288E184800866FB4 /* ua-cities.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "ua-cities.json"; sourceTree = "<group>"; };
 		1F3B31AD288E189700866FB4 /* CountryEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountryEntity.swift; sourceTree = "<group>"; };
 		1F3B31AF288E1AE100866FB4 /* SearchPlacePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchPlacePresenter.swift; sourceTree = "<group>"; };
@@ -329,6 +333,7 @@
 			children = (
 				1FCD2EFA2889BBD000ED722E /* Constants.swift */,
 				1FFBCD71288B574000130C2E /* NetworkConstants.swift */,
+				1F1A67C3288E899B0023E669 /* RealmKeyConstants.swift */,
 			);
 			path = Constants;
 			sourceTree = "<group>";
@@ -340,6 +345,7 @@
 				1FCD2EFD2889BBD000ED722E /* Localizer.swift */,
 				1F5A6A41288DDDA100E35367 /* LocationManager.swift */,
 				1F3B31BE288E1BE800866FB4 /* JsonReader.swift */,
+				1F1A67C1288E824E0023E669 /* RealmManager.swift */,
 			);
 			path = Managers;
 			sourceTree = "<group>";
@@ -591,9 +597,11 @@
 				1FA72974288CC2FA009C1043 /* UICollectionView+Extension.swift in Sources */,
 				1FA72976288CCC52009C1043 /* Double+Extension.swift in Sources */,
 				1F3B31B9288E1AE100866FB4 /* SearchPlaceInteractor.swift in Sources */,
+				1F1A67C4288E899B0023E669 /* RealmKeyConstants.swift in Sources */,
 				1F5A6A40288DDABC00E35367 /* UIViewController+Extension.swift in Sources */,
 				1FEB93352889F7AD00957C99 /* WeatherSection.swift in Sources */,
 				1F3B31B6288E1AE100866FB4 /* SearchPlacePresenter.swift in Sources */,
+				1F1A67C2288E824E0023E669 /* RealmManager.swift in Sources */,
 				1FFBCD72288B574000130C2E /* NetworkConstants.swift in Sources */,
 				1F3B31C3288E220300866FB4 /* TextCell.swift in Sources */,
 				1F3B31AE288E189700866FB4 /* CountryEntity.swift in Sources */,

@@ -10,7 +10,7 @@ import Foundation
 protocol SearchPlacePresenterType {
     var numberOfItemsInSection: Int { get }
     
-    func getTitle(at indexPath: IndexPath) -> String
+    func getTitle(at indexPath: IndexPath) -> String?
     func getCity(at indexPath: IndexPath) -> City
     func filterCities(text: String)
     func popScreen()
@@ -36,7 +36,7 @@ class SearchPlacePresenter: SearchPlacePresenterType {
     }
     
     // MARK: - Protocol methods
-    func getTitle(at indexPath: IndexPath) -> String {
+    func getTitle(at indexPath: IndexPath) -> String? {
         return interactor.filteredCities[indexPath.row].name
     }
     

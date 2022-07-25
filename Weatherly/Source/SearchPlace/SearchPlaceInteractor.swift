@@ -43,7 +43,7 @@ class SearchPlaceInteractor: SearchPlaceInteractorType {
         if text.isEmpty {
             filteredCities = allCities
         } else {
-            filteredCities = allCities.filter { $0.name.contains(text) }
+            filteredCities = allCities.filter { $0.name?.contains(text) ?? false }
         }
     }
 }

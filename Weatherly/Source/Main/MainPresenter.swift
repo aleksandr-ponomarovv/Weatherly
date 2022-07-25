@@ -38,7 +38,7 @@ class MainPresenter: MainPresenterType {
     let numberOfSections: Int = 2
     
     var title: String? {
-        return interactor.locationName
+        return interactor.selectedCity?.name
     }
     
     var time: String? {
@@ -75,7 +75,7 @@ class MainPresenter: MainPresenterType {
     
     // MARK: - Protocol methods
     func viewDidLoad() {
-        updateHourlyEntityByLastLocation()
+        updateHourlyEntityBySelectedCity()
     }
     
     func didTapNavigationLeftButton() {
@@ -127,7 +127,9 @@ class MainPresenter: MainPresenterType {
     }
     
     func didSelect(city: City) {
-        updateHourlyEntity(lat: city.lat, lon: city.log)
+        guard let lat = city.lat, let lon = city.lon else { return }
+        
+        updateHourlyEntity(lat: lat, lon: lon)
     }
 }
 
@@ -136,6 +138,12 @@ private extension MainPresenter {
     func updateHourlyEntityByLastLocation() {
         guard let lat = interactor.lat,
               let lon = interactor.lon else { return }
+        
+        updateHourlyEntity(lat: lat, lon: lon)
+    }
+    
+    func updateHourlyEntityBySelectedCity() {
+        guard let city = interactor.selectedCity, let lat = city.lat, let lon = city.lon else { return }
         
         updateHourlyEntity(lat: lat, lon: lon)
     }

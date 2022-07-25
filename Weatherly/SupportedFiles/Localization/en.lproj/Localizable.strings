@@ -1,0 +1,17 @@
+//   
+//  Localizable.strings
+//  Weatherly
+//
+//  Created by Aleksandr on 21.07.2022.
+//
+
+// MARK: - Main
+"metersPerSecond" = "m/sec";
+
+// MARK: - Alerts
+"alert.ok" = "Ok";
+"alert.settings" = "Settings";
+
+// MARK: - Location permission
+"locationPermission.title" = "Allow Location Access";
+"locationPermission.message" = "App needs access to your location. Turn on Location Services in your device settings.";

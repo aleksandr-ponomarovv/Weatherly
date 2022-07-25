@@ -1,0 +1,17 @@
+//
+//  Localizable.strings
+//  Weatherly
+//
+//  Created by Aleksandr on 21.07.2022.
+//
+
+// MARK: - Main
+"metersPerSecond" = "м/сек";
+
+// MARK: - Alerts
+"alert.ok" = "Добре";
+"alert.settings" = "Settings";
+
+// MARK: - Location permission
+"locationPermission.title" = "Дозволити доступ до місцезнаходження";
+"locationPermission.message" = "Додатку потрібен доступ до вашого місцезнаходження. Увімкніть Служби визначення місцезнаходження в налаштуваннях пристрою.";

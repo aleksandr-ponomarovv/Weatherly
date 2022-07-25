@@ -1,0 +1,262 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ViewController" customModule="Weatherly" customModuleProvider="target">
+            <connections>
+                <outlet property="forecastView" destination="jKo-Up-hfM" id="8P3-fa-DP8"/>
+                <outlet property="humidityLabel" destination="IGQ-IB-IBT" id="JjT-2y-gnF"/>
+                <outlet property="tableView" destination="VXu-Yx-hAC" id="Cy2-k5-A9Q"/>
+                <outlet property="temperatureLabel" destination="0tl-s1-nXE" id="1UX-ew-DF7"/>
+                <outlet property="timeLabel" destination="XET-Ws-RNf" id="dSi-JZ-D2b"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+                <outlet property="weatherImageView" destination="T55-ss-z6o" id="jkA-9H-tow"/>
+                <outlet property="windSpeedLabel" destination="aOk-4H-VBE" id="A8l-Jw-02N"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jKo-Up-hfM">
+                    <rect key="frame" x="0.0" y="0.0" width="414" height="324.5"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="date" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XET-Ws-RNf">
+                            <rect key="frame" x="24" y="74" width="366" height="20.5"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <color key="textColor" name="text_forecast"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="tkg-Pc-kgK">
+                            <rect key="frame" x="0.0" y="126.5" width="414" height="174"/>
+                            <subviews>
+                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SQC-Mg-Lhj">
+                                    <rect key="frame" x="0.0" y="0.0" width="201" height="174"/>
+                                    <subviews>
+                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="T55-ss-z6o">
+                                            <rect key="frame" x="13.5" y="0.0" width="174" height="174"/>
+                                            <color key="tintColor" name="image_forecast"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" secondItem="T55-ss-z6o" secondAttribute="height" multiplier="1:1" id="vQV-7x-gCj"/>
+                                            </constraints>
+                                        </imageView>
+                                    </subviews>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <constraints>
+                                        <constraint firstItem="T55-ss-z6o" firstAttribute="top" secondItem="SQC-Mg-Lhj" secondAttribute="top" id="ON0-vS-nnK"/>
+                                        <constraint firstAttribute="bottom" secondItem="T55-ss-z6o" secondAttribute="bottom" id="egU-EF-dkk"/>
+                                        <constraint firstItem="T55-ss-z6o" firstAttribute="centerX" secondItem="SQC-Mg-Lhj" secondAttribute="centerX" id="sV4-25-VBf"/>
+                                    </constraints>
+                                </view>
+                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RWU-Un-QGr">
+                                    <rect key="frame" x="213" y="0.0" width="201" height="174"/>
+                                    <subviews>
+                                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="Y3u-yI-hju">
+                                            <rect key="frame" x="0.0" y="0.0" width="201" height="174"/>
+                                            <subviews>
+                                                <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="Rrf-rL-WKA">
+                                                    <rect key="frame" x="0.0" y="0.0" width="201" height="50"/>
+                                                    <subviews>
+                                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oqy-uo-UEc">
+                                                            <rect key="frame" x="0.0" y="0.0" width="16" height="50"/>
+                                                            <subviews>
+                                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_temp" translatesAutoresizingMaskIntoConstraints="NO" id="Pn6-dZ-OX1">
+                                                                    <rect key="frame" x="0.0" y="17" width="16" height="16"/>
+                                                                    <color key="tintColor" name="image_forecast"/>
+                                                                    <constraints>
+                                                                        <constraint firstAttribute="height" constant="16" id="fec-Fn-tZb"/>
+                                                                        <constraint firstAttribute="width" constant="16" id="ttF-HE-PbZ"/>
+                                                                    </constraints>
+                                                                </imageView>
+                                                            </subviews>
+                                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                            <constraints>
+                                                                <constraint firstItem="Pn6-dZ-OX1" firstAttribute="leading" secondItem="oqy-uo-UEc" secondAttribute="leading" id="05k-VE-LtT"/>
+                                                                <constraint firstItem="Pn6-dZ-OX1" firstAttribute="centerY" secondItem="oqy-uo-UEc" secondAttribute="centerY" id="qbf-fp-P5M"/>
+                                                                <constraint firstAttribute="trailing" secondItem="Pn6-dZ-OX1" secondAttribute="trailing" id="zgA-pC-9UD"/>
+                                                            </constraints>
+                                                        </view>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="temperature" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0tl-s1-nXE">
+                                                            <rect key="frame" x="24" y="0.0" width="177" height="50"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                            <color key="textColor" name="text_forecast"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                    </subviews>
+                                                </stackView>
+                                                <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="Bgc-iJ-2YN">
+                                                    <rect key="frame" x="0.0" y="62" width="201" height="50"/>
+                                                    <subviews>
+                                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4YT-9a-DGA">
+                                                            <rect key="frame" x="0.0" y="0.0" width="16" height="50"/>
+                                                            <subviews>
+                                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_humidity" translatesAutoresizingMaskIntoConstraints="NO" id="wmX-X2-Mtx">
+                                                                    <rect key="frame" x="0.0" y="17" width="16" height="16"/>
+                                                                    <color key="tintColor" name="image_forecast"/>
+                                                                    <constraints>
+                                                                        <constraint firstAttribute="height" constant="16" id="f2G-yY-xfH"/>
+                                                                        <constraint firstAttribute="width" constant="16" id="p0q-N7-S0H"/>
+                                                                    </constraints>
+                                                                </imageView>
+                                                            </subviews>
+                                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="trailing" secondItem="wmX-X2-Mtx" secondAttribute="trailing" id="eS3-hr-RQu"/>
+                                                                <constraint firstItem="wmX-X2-Mtx" firstAttribute="centerY" secondItem="4YT-9a-DGA" secondAttribute="centerY" id="qfh-3a-sn5"/>
+                                                                <constraint firstItem="wmX-X2-Mtx" firstAttribute="leading" secondItem="4YT-9a-DGA" secondAttribute="leading" id="y6Y-8w-Dwb"/>
+                                                            </constraints>
+                                                        </view>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="humidity" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IGQ-IB-IBT">
+                                                            <rect key="frame" x="24" y="0.0" width="177" height="50"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                            <color key="textColor" name="text_forecast"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                    </subviews>
+                                                </stackView>
+                                                <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="pEf-w6-ju6">
+                                                    <rect key="frame" x="0.0" y="124" width="201" height="50"/>
+                                                    <subviews>
+                                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Pwk-PR-a3e">
+                                                            <rect key="frame" x="0.0" y="0.0" width="16" height="50"/>
+                                                            <subviews>
+                                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_wind" translatesAutoresizingMaskIntoConstraints="NO" id="Gbh-rK-WiZ">
+                                                                    <rect key="frame" x="0.0" y="17" width="16" height="16"/>
+                                                                    <color key="tintColor" name="image_forecast"/>
+                                                                    <constraints>
+                                                                        <constraint firstAttribute="width" constant="16" id="1lI-Sv-VMa"/>
+                                                                        <constraint firstAttribute="height" constant="16" id="AOl-hv-Qrh"/>
+                                                                    </constraints>
+                                                                </imageView>
+                                                            </subviews>
+                                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="trailing" secondItem="Gbh-rK-WiZ" secondAttribute="trailing" id="OLl-Oe-264"/>
+                                                                <constraint firstItem="Gbh-rK-WiZ" firstAttribute="leading" secondItem="Pwk-PR-a3e" secondAttribute="leading" id="cQA-lo-Nwo"/>
+                                                                <constraint firstItem="Gbh-rK-WiZ" firstAttribute="centerY" secondItem="Pwk-PR-a3e" secondAttribute="centerY" id="eiZ-q0-xa1"/>
+                                                            </constraints>
+                                                        </view>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="windSpeed" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aOk-4H-VBE">
+                                                            <rect key="frame" x="24" y="0.0" width="177" height="50"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                            <color key="textColor" name="text_forecast"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                    </subviews>
+                                                </stackView>
+                                            </subviews>
+                                        </stackView>
+                                    </subviews>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <constraints>
+                                        <constraint firstItem="Y3u-yI-hju" firstAttribute="top" secondItem="RWU-Un-QGr" secondAttribute="top" id="1iv-Bp-Wbc"/>
+                                        <constraint firstItem="Y3u-yI-hju" firstAttribute="leading" secondItem="RWU-Un-QGr" secondAttribute="leading" id="3W1-3K-OkK"/>
+                                        <constraint firstAttribute="bottom" secondItem="Y3u-yI-hju" secondAttribute="bottom" id="FSn-JG-qom"/>
+                                        <constraint firstAttribute="trailing" secondItem="Y3u-yI-hju" secondAttribute="trailing" id="HdF-Mk-v1J"/>
+                                    </constraints>
+                                </view>
+                            </subviews>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        </stackView>
+                    </subviews>
+                    <color key="backgroundColor" name="main_forecast_bg"/>
+                    <constraints>
+                        <constraint firstAttribute="trailing" secondItem="tkg-Pc-kgK" secondAttribute="trailing" id="3rp-4K-MrX"/>
+                        <constraint firstAttribute="bottom" secondItem="tkg-Pc-kgK" secondAttribute="bottom" constant="24" id="5Oc-6G-r2k"/>
+                        <constraint firstItem="XET-Ws-RNf" firstAttribute="top" relation="greaterThanOrEqual" secondItem="jKo-Up-hfM" secondAttribute="top" constant="44" id="9xj-jU-svz"/>
+                        <constraint firstItem="tkg-Pc-kgK" firstAttribute="leading" secondItem="jKo-Up-hfM" secondAttribute="leading" id="A5S-V9-9Sd"/>
+                        <constraint firstItem="tkg-Pc-kgK" firstAttribute="top" secondItem="XET-Ws-RNf" secondAttribute="bottom" priority="750" constant="32" id="Fhd-ug-x15"/>
+                        <constraint firstAttribute="trailing" secondItem="XET-Ws-RNf" secondAttribute="trailing" constant="24" id="Tgd-Cp-w3V"/>
+                        <constraint firstItem="XET-Ws-RNf" firstAttribute="leading" secondItem="jKo-Up-hfM" secondAttribute="leading" constant="24" id="bot-6m-VJp"/>
+                    </constraints>
+                </view>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="VXu-Yx-hAC">
+                    <rect key="frame" x="0.0" y="324.5" width="414" height="537.5"/>
+                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                </tableView>
+            </subviews>
+            <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
+            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+            <constraints>
+                <constraint firstItem="VXu-Yx-hAC" firstAttribute="height" secondItem="i5M-Pr-FkT" secondAttribute="height" multiplier="0.6" id="CpV-wu-ICh"/>
+                <constraint firstItem="VXu-Yx-hAC" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="NIo-Oo-51R"/>
+                <constraint firstItem="VXu-Yx-hAC" firstAttribute="width" secondItem="i5M-Pr-FkT" secondAttribute="width" multiplier="0.5" id="Snk-hq-YYp"/>
+                <constraint firstItem="jKo-Up-hfM" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="a5z-O0-DxI"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="jKo-Up-hfM" secondAttribute="bottom" id="gx3-j9-qH7"/>
+                <constraint firstItem="jKo-Up-hfM" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="isy-2y-Y37"/>
+                <constraint firstItem="VXu-Yx-hAC" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="k83-wq-wgL"/>
+                <constraint firstItem="VXu-Yx-hAC" firstAttribute="top" secondItem="jKo-Up-hfM" secondAttribute="bottom" id="kJ3-U5-eiE"/>
+                <constraint firstItem="VXu-Yx-hAC" firstAttribute="leading" secondItem="jKo-Up-hfM" secondAttribute="trailing" id="maB-lY-5zz"/>
+                <constraint firstAttribute="trailing" secondItem="jKo-Up-hfM" secondAttribute="trailing" id="oZd-Ou-4fo"/>
+                <constraint firstAttribute="trailing" secondItem="VXu-Yx-hAC" secondAttribute="trailing" id="pDb-zN-qkc"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="VXu-Yx-hAC" secondAttribute="bottom" id="uCA-5y-6Lc"/>
+            </constraints>
+            <variation key="default">
+                <mask key="constraints">
+                    <exclude reference="gx3-j9-qH7"/>
+                    <exclude reference="oZd-Ou-4fo"/>
+                    <exclude reference="CpV-wu-ICh"/>
+                    <exclude reference="NIo-Oo-51R"/>
+                    <exclude reference="Snk-hq-YYp"/>
+                    <exclude reference="k83-wq-wgL"/>
+                    <exclude reference="kJ3-U5-eiE"/>
+                    <exclude reference="maB-lY-5zz"/>
+                </mask>
+            </variation>
+            <variation key="heightClass=compact-widthClass=compact">
+                <mask key="constraints">
+                    <include reference="gx3-j9-qH7"/>
+                    <include reference="NIo-Oo-51R"/>
+                    <include reference="Snk-hq-YYp"/>
+                    <include reference="maB-lY-5zz"/>
+                </mask>
+            </variation>
+            <variation key="heightClass=compact-widthClass=regular">
+                <mask key="constraints">
+                    <include reference="gx3-j9-qH7"/>
+                    <exclude reference="oZd-Ou-4fo"/>
+                    <include reference="NIo-Oo-51R"/>
+                    <include reference="Snk-hq-YYp"/>
+                    <exclude reference="k83-wq-wgL"/>
+                    <include reference="maB-lY-5zz"/>
+                </mask>
+            </variation>
+            <variation key="heightClass=regular-widthClass=compact">
+                <mask key="constraints">
+                    <include reference="oZd-Ou-4fo"/>
+                    <include reference="CpV-wu-ICh"/>
+                    <include reference="k83-wq-wgL"/>
+                    <include reference="kJ3-U5-eiE"/>
+                </mask>
+            </variation>
+            <point key="canvasLocation" x="137.27678571428569" y="128.98550724637681"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="ic_humidity" width="16" height="20"/>
+        <image name="ic_temp" width="10" height="20"/>
+        <image name="ic_wind" width="17" height="19"/>
+        <namedColor name="image_forecast">
+            <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+        </namedColor>
+        <namedColor name="main_forecast_bg">
+            <color red="0.35699999332427979" green="0.55699998140335083" blue="0.86299997568130493" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+        </namedColor>
+        <namedColor name="text_forecast">
+            <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+        </namedColor>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>

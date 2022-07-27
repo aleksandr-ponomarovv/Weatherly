@@ -79,7 +79,7 @@ class MainPresenter: MainPresenterType {
     }
     
     func didTapNavigationLeftButton() {
-        router.pushSearchScreen()
+        router.showSearchScreen()
     }
     
     func didTapNavigationRightButton() {
@@ -89,7 +89,7 @@ class MainPresenter: MainPresenterType {
             if hasPermission {
                 self.updateHourlyEntityByLastLocation()
             } else {
-                self.router.presentSettingsScreen()
+                self.router.showSettingsScreen()
             }
         }
     }

@@ -26,6 +26,27 @@ extension UIViewController {
         rightBarButtonItem.tintColor = R.color.navigation_button()
         navigationItem.rightBarButtonItem = rightBarButtonItem
     }
+    
+    func setupNavigationTitleView(textField: UITextField) {
+        let rightBarButtonItem = UIBarButtonItem(image: R.image.ic_search(),
+                                                 style: .done,
+                                                 target: nil,
+                                                 action: nil)
+        rightBarButtonItem.tintColor = R.color.navigation_button()
+        navigationItem.rightBarButtonItem = rightBarButtonItem
+        textField.frame.size.width = navigationController?.navigationBar.frame.size.width ?? 0
+        navigationItem.titleView = textField
+    }
+    
+    func setupNavigation(title: String?) {
+        let label = UILabel()
+        label.text = title
+        label.font = .boldSystemFont(ofSize: 17)
+        label.textColor = R.color.navigation_title()
+        label.frame.size.width = navigationController?.navigationBar.frame.size.width ?? 0
+        label.textAlignment = .left
+        navigationItem.titleView = label
+    }
 }
 
 // MARK: - Routing

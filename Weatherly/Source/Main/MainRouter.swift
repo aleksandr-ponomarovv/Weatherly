@@ -8,8 +8,8 @@
 import Foundation
 
 protocol MainRouterType {
-    func showSettingsScreen()
     func showSearchScreen()
+    func showMapScreen()
 }
 
 class MainRouter: MainRouterType {
@@ -20,16 +20,17 @@ class MainRouter: MainRouterType {
         self.viewController = viewController
     }
     
-    func showSettingsScreen() {
-        viewController?.presentSettingsScreen(title: Localizable.locationPermissionTitle.key.localized(),
-                                              message: Localizable.locationPermissionMessage.key.localized())
-    }
-    
     func showSearchScreen() {
-        let searchPlaceViewController = SearchPlaceViewController()
-        searchPlaceViewController.delegate = viewController
-        let configurator: SearchPlaceConfiguratorType = SearchPlaceConfigurator()
+        let searchPlaceViewController = SearchLocationViewController()
+        let configurator: SearchLocationConfiguratorType = SearchLocationConfigurator()
         configurator.configure(viewController: searchPlaceViewController)
         viewController?.navigationController?.pushViewController(searchPlaceViewController, animated: true)
+    }
+    
+    func showMapScreen() {
+        let mapViewController = MapViewController()
+        let configurator: MapConfiguratorType = MapConfigurator()
+        configurator.configure(viewController: mapViewController)
+        viewController?.navigationController?.pushViewController(mapViewController, animated: true)
     }
 }

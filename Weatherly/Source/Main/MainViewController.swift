@@ -41,7 +41,7 @@ class MainViewController: UIViewController {
 // MARK: - MainViewType
 extension MainViewController: MainViewType {
     func updateUI() {
-        title = presenter?.title
+        setupUI()
         timeLabel.text = presenter?.time
         weatherImageView.image = presenter?.weatherIcon
         temperatureLabel.text = presenter?.temperature
@@ -85,26 +85,13 @@ extension MainViewController: UITableViewDelegate {
     }
 }
 
-// MARK: - LocationManagerDelegate
-extension MainViewController: LocationManagerDelegate {
-    func locationManagerDidUpdateLocations(lat: String, lon: String) {
-        presenter?.didUpdateLocations(lat: lat, lon: lon)
-    }
-}
-
-// MARK: - SearchPlaceDelegate
-extension MainViewController: SearchPlaceDelegate {
-    func searchPlaceDidSelect(_ searchPlaceViewController: SearchPlaceViewController, city: City) {
-        presenter?.didSelect(city: city)
-    }
-}
-
 // MARK: - Private methods
 private extension MainViewController {
     func configureUI() {
         localizeUI()
         setupNavigationBar()
         setupTableView()
+        setupUI()
     }
     
     func setupTableView() {
@@ -112,6 +99,10 @@ private extension MainViewController {
         tableView.delegate = self
         tableView.register(cell: HoursCell.self)
         tableView.register(cell: DayCell.self)
+    }
+    
+    func setupUI() {
+        setupNavigation(title: presenter?.title)
     }
     
     func subscribeNotifications() {

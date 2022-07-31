@@ -14,7 +14,7 @@ protocol MainConfiguratorType {
 class MainConfigurator: MainConfiguratorType {
     
     func configure(viewController: MainViewController) {
-        let interactor = MainInteractor(locationManagerDelegate: viewController)
+        let interactor = MainInteractor()
         let router = MainRouter(viewController: viewController)
         let presenter = MainPresenter(interactor: interactor, router: router, view: viewController)
         viewController.presenter = presenter

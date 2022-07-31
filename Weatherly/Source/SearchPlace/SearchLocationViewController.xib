@@ -11,8 +11,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ViewController" customModule="Weatherly" customModuleProvider="target">
             <connections>
-                <outlet property="searchBar" destination="tZ3-HP-Gm7" id="FZe-Qh-IWR"/>
-                <outlet property="tableView" destination="yUc-jG-Q5v" id="4ii-r3-NfB"/>
+                <outlet property="tableView" destination="Lfc-R5-9UJ" id="7A4-Ub-KwP"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -21,26 +20,18 @@
             <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="yUc-jG-Q5v">
-                    <rect key="frame" x="0.0" y="95" width="414" height="767"/>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="Lfc-R5-9UJ">
+                    <rect key="frame" x="0.0" y="44" width="414" height="818"/>
                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                    <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                 </tableView>
-                <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="tZ3-HP-Gm7">
-                    <rect key="frame" x="0.0" y="44" width="414" height="51"/>
-                    <textInputTraits key="textInputTraits"/>
-                </searchBar>
             </subviews>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
             <constraints>
-                <constraint firstItem="tZ3-HP-Gm7" firstAttribute="trailing" secondItem="fnl-2z-Ty3" secondAttribute="trailing" id="Bev-xy-57C"/>
-                <constraint firstItem="yUc-jG-Q5v" firstAttribute="top" secondItem="tZ3-HP-Gm7" secondAttribute="bottom" id="BfQ-cB-rQI"/>
-                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="yUc-jG-Q5v" secondAttribute="trailing" id="PmC-Ko-KGg"/>
-                <constraint firstItem="tZ3-HP-Gm7" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="cyc-XT-AzK"/>
-                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="yUc-jG-Q5v" secondAttribute="bottom" id="fs7-cG-dzM"/>
-                <constraint firstItem="yUc-jG-Q5v" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="qSx-Ld-Akg"/>
-                <constraint firstItem="tZ3-HP-Gm7" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="wjD-sE-aIG"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="Lfc-R5-9UJ" secondAttribute="bottom" id="HAM-Re-8Sr"/>
+                <constraint firstItem="Lfc-R5-9UJ" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="Vzz-ZH-Aw1"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="Lfc-R5-9UJ" secondAttribute="trailing" id="bE8-H0-csp"/>
+                <constraint firstItem="Lfc-R5-9UJ" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="laG-IC-liW"/>
             </constraints>
             <point key="canvasLocation" x="139" y="95"/>
         </view>

@@ -24,8 +24,7 @@ protocol MainPresenterType {
     func numberOfRowsInSection(section: Int) -> Int
     func getDayCellModel(at indexPath: IndexPath) -> DayCellModel
     func tableView(heightForRowAt indexPath: IndexPath) -> CGFloat
-    func didUpdateLocations(lat: String, lon: String)
-    func didSelect(city: City)
+    func didUpdateLocations(location: Location)
 }
 
 class MainPresenter: MainPresenterType {
@@ -38,7 +37,7 @@ class MainPresenter: MainPresenterType {
     let numberOfSections: Int = 2
     
     var title: String? {
-        return interactor.selectedCity?.name
+        return interactor.selectedLocation?.name
     }
     
     var time: String? {
@@ -75,7 +74,8 @@ class MainPresenter: MainPresenterType {
     
     // MARK: - Protocol methods
     func viewDidLoad() {
-        updateHourlyEntityBySelectedCity()
+        subscribeLocationNotification()
+        updateWeatherData()
     }
     
     func didTapNavigationLeftButton() {
@@ -83,15 +83,7 @@ class MainPresenter: MainPresenterType {
     }
     
     func didTapNavigationRightButton() {
-        interactor.checkLocationPermission { [weak self] hasPermission in
-            guard let self = self else { return }
-            
-            if hasPermission {
-                self.updateHourlyEntityByLastLocation()
-            } else {
-                self.router.showSettingsScreen()
-            }
-        }
+        router.showMapScreen()
     }
     
     func weatherSection(by index: Int) -> WeatherSection {
@@ -122,34 +114,28 @@ class MainPresenter: MainPresenterType {
         }
     }
     
-    func didUpdateLocations(lat: String, lon: String) {
-        updateHourlyEntity(lat: lat, lon: lon)
-    }
-    
-    func didSelect(city: City) {
-        guard let lat = city.lat, let lon = city.lon else { return }
-        
-        updateHourlyEntity(lat: lat, lon: lon)
+    func didUpdateLocations(location: Location) {
+        interactor.save(location: location)
     }
 }
 
 // MARK: - Private methods
 private extension MainPresenter {
-    func updateHourlyEntityByLastLocation() {
-        guard let lat = interactor.lat,
-              let lon = interactor.lon else { return }
-        
-        updateHourlyEntity(lat: lat, lon: lon)
+    func subscribeLocationNotification() {
+        interactor.subscribeLocationNotification { [weak self] change in
+            guard let self = self else { return }
+            
+            switch change {
+            case .initial, .update:
+                self.updateWeatherData()
+            case .error:
+                break
+            }
+        }
     }
     
-    func updateHourlyEntityBySelectedCity() {
-        guard let city = interactor.selectedCity, let lat = city.lat, let lon = city.lon else { return }
-        
-        updateHourlyEntity(lat: lat, lon: lon)
-    }
-    
-    func updateHourlyEntity(lat: String, lon: String) {
-        interactor.updateHourlyEntity(lat: lat, lon: lon) { [weak self] result in
+    func updateWeatherData() {
+        interactor.updateWeatherData() { [weak self] result in
             guard let self = self else { return }
             
             switch result {

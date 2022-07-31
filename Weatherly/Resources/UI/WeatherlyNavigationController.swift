@@ -9,6 +9,10 @@ import UIKit
 
 class WeatherlyNavigationController: UINavigationController {
     
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        .lightContent
+    }
+    
     override init(rootViewController: UIViewController) {
         super.init(rootViewController: rootViewController)
         

@@ -12,7 +12,7 @@ final class RealmManager {
     
     static let shared = RealmManager()
     
-    private var schemaVersion: UInt64 = 1
+    private var schemaVersion: UInt64 = 2
     
     private init() {
         prepareRealmDatabase()
@@ -34,6 +34,22 @@ final class RealmManager {
     func getObject<T: Object>(primaryKey: String) -> T? {
         let realm = try? Realm()
         return realm?.object(ofType: T.self, forPrimaryKey: primaryKey)
+    }
+    
+    func observeUpdateChanges<T: Object>(type: T.Type, _ changeBlock: @escaping (RealmCollectionChange<Results<T>>) -> Void) -> NotificationToken? {
+        do {
+            let realm = try Realm()
+            return realm.objects(type).observe { change in
+                switch change {
+                case .update:
+                    changeBlock(change)
+                default:
+                    break
+                }
+            }
+        } catch {
+            return nil
+        }
     }
 }
 

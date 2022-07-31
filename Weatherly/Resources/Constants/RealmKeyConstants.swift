@@ -9,5 +9,5 @@ import Foundation
 
 struct RealmKeyConstants {
     static let primaryKey = "realmId"
-    static let selectedCityId = "selectedCityId"
+    static let locationId = "locationId"
 }

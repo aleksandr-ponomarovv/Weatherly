@@ -6,29 +6,30 @@
 //
 
 import CoreLocation
+import Realm
+import RealmSwift
 
 protocol MainInteractorType {
-    var selectedCity: City? { get }
+    var selectedLocation: Location? { get }
     var current: CurrentModel? { get }
     var hourCellModels: [HourCellModel] { get }
     var dayCellModels: [DayCellModel] { get }
-    var lat: String? { get }
-    var lon: String? { get }
     
-    func updateHourlyEntity(lat: String, lon: String, completion: @escaping(Responce<Bool>) -> Void)
-    func checkLocationPermission(completion: @escaping(Bool) -> Void)
+    func updateWeatherData(completion: @escaping(Responce<Bool>) -> Void)
+    func save(location: Location)
+    func subscribeLocationNotification(completion: @escaping(RealmCollectionChange<Results<Location>>) -> Void)
 }
 
 class MainInteractor: MainInteractorType {
-        
+    
     private let weatherService = WeatherService()
-    private let locationManager = LocationManager.shared
     private let realmManager = RealmManager.shared
     private var hourlyEntity: HourlyEntity?
-        
+    private var notificationToken: NotificationToken?
+    
     // MARK: - Protocol property
-    var selectedCity: City? {
-        return realmManager.getObject(primaryKey: RealmKeyConstants.selectedCityId)
+    var selectedLocation: Location? {
+        return realmManager.getObject(primaryKey: RealmKeyConstants.locationId)
     }
     
     var current: CurrentModel? {
@@ -46,22 +47,12 @@ class MainInteractor: MainInteractorType {
         return hourlyEntity?.daily ?? []
     }
     
-    var lat: String? {
-        locationManager.latitude
-    }
-    
-    var lon: String? {
-        locationManager.longitude
-    }
-    
-    init(locationManagerDelegate: LocationManagerDelegate) {
-        locationManager.delegate = locationManagerDelegate
-    }
-    
     // MARK: - Protocol methods
-    func updateHourlyEntity(lat: String, lon: String, completion: @escaping(Responce<Bool>) -> Void) {
-        getPlaceName(lat: lat, lon: lon)
-        weatherService.getHourly(lat: lat, lon: lon) { [weak self] result in
+    func updateWeatherData(completion: @escaping(Responce<Bool>) -> Void) {
+        guard let latitude = selectedLocation?.latitude,
+              let longitude = selectedLocation?.longitude else { return }
+        
+        weatherService.getHourly(lat: String(latitude), lon: String(longitude)) { [weak self] result in
             guard let self = self else { return }
             
             switch result {
@@ -74,22 +65,11 @@ class MainInteractor: MainInteractorType {
         }
     }
     
-    func checkLocationPermission(completion: @escaping (Bool) -> Void) {
-        locationManager.checkPermission(authorizedHandler: completion)
+    func save(location: Location) {
+        realmManager.addOrUpdate(object: location)
     }
-}
-
-// MARK: - Private methods
-private extension MainInteractor {
-    func getPlaceName(lat: String, lon: String) {
-        guard let latDouble = lat.toDouble(), let lonDouble = lon.toDouble() else { return }
-        
-        locationManager.getPlaceName(lat: latDouble, lon: lonDouble) { [weak self] name in
-            guard let self = self,
-                  let name = name else { return }
-            
-            let city = City(name: name, lat: lat, lon: lon)
-            self.realmManager.addOrUpdate(object: city)
-        }
+    
+    func subscribeLocationNotification(completion: @escaping(RealmCollectionChange<Results<Location>>) -> Void) {
+        notificationToken = realmManager.observeUpdateChanges(type: Location.self, completion)
     }
 }

@@ -1,5 +1,5 @@
 //   
-//  ViperRouter.swift
+//  SearchLocationRouter.swift
 //  Weatherly
 //
 //  Created by Aleksandr on 25.07.2022.
@@ -7,15 +7,15 @@
 
 import Foundation
 
-protocol SearchPlaceRouterType {
+protocol SearchLocationRouterType {
     func popViewController()
 }
 
-class SearchPlaceRouter: SearchPlaceRouterType {
+class SearchLocationRouter: SearchLocationRouterType {
     
-    private weak var viewController: SearchPlaceViewController?
+    private weak var viewController: SearchLocationViewController?
     
-    init(viewController: SearchPlaceViewController) {
+    init(viewController: SearchLocationViewController) {
         self.viewController = viewController
     }
     

@@ -8,6 +8,12 @@
 // MARK: - Main
 "metersPerSecond" = "m/sec";
 
+// MARK: - Map
+"map.title" = "Map";
+
+// MARK: - SearchPlace
+"searchPlace.navigation.textField.placeholder" = "Search...";
+
 // MARK: - Alerts
 "alert.ok" = "Ok";
 "alert.settings" = "Settings";

@@ -8,7 +8,7 @@
 import CoreLocation
 
 protocol LocationManagerDelegate: AnyObject {
-    func locationManagerDidUpdateLocations(lat: String, lon: String)
+    func locationManagerDidUpdateLocations(location: Location)
 }
 
 final class LocationManager: NSObject, CLLocationManagerDelegate {
@@ -19,16 +19,6 @@ final class LocationManager: NSObject, CLLocationManagerDelegate {
     
     private let locationManager = CLLocationManager()
     
-    var latitude: String? {
-        guard let latitude = locationManager.location?.coordinate.latitude else { return nil }
-        return String(latitude)
-    }
-    
-    var longitude: String? {
-        guard let longitude = locationManager.location?.coordinate.longitude else { return nil }
-        return String(longitude)
-    }
-    
     override private init() {
         super.init()
         
@@ -36,20 +26,42 @@ final class LocationManager: NSObject, CLLocationManagerDelegate {
         locationManager.requestAlwaysAuthorization()
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
         locationManager.requestWhenInUseAuthorization()
+    }
+    
+    func startUpdatingLocation() {
         locationManager.startUpdatingLocation()
     }
     
-    func getPlaceName(lat: Double, lon: Double, completion: @escaping (String?) -> Void) {
-        let locationCoordinate = CLLocationCoordinate2D(latitude: lat, longitude: lon)
+    func getLocation(latitude: Double, longitude: Double, completion: @escaping (Location?) -> Void) {
         let geocoder = CLGeocoder()
-        let location = CLLocation(latitude: locationCoordinate.latitude, longitude: locationCoordinate.longitude)
-        geocoder.reverseGeocodeLocation(location) { (placemarks, error) in
+        let location = CLLocation(latitude: latitude, longitude: longitude)
+        geocoder.reverseGeocodeLocation(location) { places, error in
             if error == nil,
-               let placemarks = placemarks?.first,
-               let locationName = placemarks.locality {
-                completion(locationName)
+               let place = places?.first,
+               let name = place.locality,
+               let country = place.country {
+                
+                completion(Location(name: name, country: country, latitude: latitude, longitude: longitude))
             } else {
                 completion(nil)
+            }
+        }
+    }
+    
+    func findLocations(text: String, completion: @escaping ([Location]) -> Void) {
+        let geocoder = CLGeocoder()
+        geocoder.geocodeAddressString(text) { places, error in
+            if let places = places, error == nil {
+                let cities: [Location] = places.compactMap { place in
+                    guard let name = place.locality,
+                          let country = place.country,
+                          let coordinate = place.location?.coordinate else { return nil }
+                    
+                    return Location(name: name, country: country, latitude: coordinate.latitude, longitude: coordinate.longitude)
+                }
+                completion(cities)
+            } else {
+                completion([])
             }
         }
     }
@@ -72,6 +84,14 @@ final class LocationManager: NSObject, CLLocationManagerDelegate {
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         guard let coordinate = locations.last?.coordinate else { return }
         
-        delegate?.locationManagerDidUpdateLocations(lat: String(coordinate.latitude), lon: String(coordinate.longitude))
+        locationManager.stopUpdatingLocation()
+        let latitude = coordinate.latitude
+        let longitude = coordinate.longitude
+        getLocation(latitude: latitude, longitude: longitude) { [weak self] location in
+            guard let self = self,
+                  let location = location else { return }
+            
+            self.delegate?.locationManagerDidUpdateLocations(location: location)
+        }
     }
 }

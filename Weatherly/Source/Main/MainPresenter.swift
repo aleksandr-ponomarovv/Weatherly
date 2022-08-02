@@ -12,9 +12,9 @@ protocol MainPresenterType {
     var numberOfSections: Int { get }
     var time: String? { get }
     var weatherIcon: UIImage? { get }
-    var temperature: String? { get }
-    var humidity: String? { get }
-    var windSpeed: String? { get }
+    var temperature: String { get }
+    var humidity: String { get }
+    var windSpeed: String { get }
     var hourCellModels: [HourCellModel] { get }
     
     func viewDidLoad()
@@ -48,16 +48,16 @@ class MainPresenter: MainPresenterType {
         interactor.current?.icon
     }
     
-    var temperature: String? {
-        interactor.current?.temperature
+    var temperature: String {
+        interactor.current?.temperature ?? "temperature"
     }
     
-    var humidity: String? {
-        interactor.current?.percentHumidity
+    var humidity: String {
+        interactor.current?.percentHumidity ?? "humidity"
     }
     
-    var windSpeed: String? {
-        interactor.current?.windSpeedMetersPerSecond
+    var windSpeed: String {
+        interactor.current?.windSpeedMetersPerSecond ?? "wind speed"
     }
     
     var hourCellModels: [HourCellModel] {

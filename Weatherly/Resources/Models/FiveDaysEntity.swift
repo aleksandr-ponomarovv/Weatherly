@@ -35,8 +35,13 @@ struct MainWeatherInformation: Codable {
     @objc private dynamic var weatherDescriptionRawValue: String?
     
     var weatherDescription: Description? {
-        guard let descriptionRawValue = weatherDescriptionRawValue else { return nil }
-        return Description(rawValue: descriptionRawValue)
+        get {
+            guard let descriptionRawValue = weatherDescriptionRawValue else { return nil }
+            return Description(rawValue: descriptionRawValue)
+        }
+        set {
+            weatherDescriptionRawValue = newValue?.rawValue
+        }
     }
     
     enum CodingKeys: String, CodingKey {
@@ -46,18 +51,20 @@ struct MainWeatherInformation: Codable {
     }
     
     init(identifire: Int, weatherDescription: Description? = nil, icon: String) {
+        super.init()
+        
         self.identifire = identifire
-        self.weatherDescriptionRawValue = weatherDescription?.rawValue
+        self.weatherDescription = weatherDescription
         self.icon = icon
     }
     
     required init(from decoder: Decoder) throws {
+        super.init()
+        
         let container = try decoder.container(keyedBy: CodingKeys.self)
         identifire = try container.decode(Int.self, forKey: .identifire)
-        weatherDescriptionRawValue = try? container.decode(Description.self, forKey: .weatherDescription).rawValue
+        weatherDescription = try? container.decode(Description.self, forKey: .weatherDescription)
         icon = try? container.decode(String.self, forKey: .icon)
-        
-        super.init()
     }
     
     required override init() {

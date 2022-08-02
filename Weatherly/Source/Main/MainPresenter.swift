@@ -49,15 +49,15 @@ class MainPresenter: MainPresenterType {
     }
     
     var temperature: String {
-        interactor.current?.temperature ?? "temperature"
+        interactor.current?.temperature ?? Localizable.temperature.key.localized()
     }
     
     var humidity: String {
-        interactor.current?.percentHumidity ?? "humidity"
+        interactor.current?.percentHumidity ?? Localizable.humidity.key.localized()
     }
     
     var windSpeed: String {
-        interactor.current?.windSpeedMetersPerSecond ?? "wind speed"
+        interactor.current?.windSpeedMetersPerSecond ?? Localizable.windSpeed.key.localized()
     }
     
     var hourCellModels: [HourCellModel] {

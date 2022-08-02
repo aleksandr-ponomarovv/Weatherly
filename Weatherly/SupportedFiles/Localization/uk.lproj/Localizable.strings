@@ -7,6 +7,9 @@
 
 // MARK: - Main
 "metersPerSecond" = "м/сек";
+"temperature" = "температура";
+"humidity" = "вологість";
+"windSpeed" = "швидкість вітру";
 
 // MARK: - Map
 "map.title" = "Мапа";

@@ -7,6 +7,9 @@
 
 // MARK: - Main
 "metersPerSecond" = "m/sec";
+"temperature" = "temperature";
+"humidity" = "humidity";
+"windSpeed" = "wind speed";
 
 // MARK: - Map
 "map.title" = "Map";

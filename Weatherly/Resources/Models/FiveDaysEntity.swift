@@ -6,34 +6,15 @@
 //
 
 import UIKit
-
-// MARK: - List
-struct List: Codable {
-    let dateTime: Int
-    let main: MainWeatherInformation
-    let weather: [Weather]
-    let visibility: Int
-    let pop: Double
-    let dtTxt: String
-
-    enum CodingKeys: String, CodingKey {
-        case main, weather, visibility, pop
-        case dtTxt = "dt_txt"
-        case dateTime = "dt"
-    }
-}
-
-// MARK: - Clouds
-struct Clouds: Codable {
-    let all: Int
-}
+import RealmSwift
+import Realm
 
 // MARK: - MainClass
 struct MainWeatherInformation: Codable {
     let temp, feelsLike, tempMin, tempMax: Double
     let pressure, seaLevel, grndLevel, humidity: Int
     let tempKf: Double
-
+    
     enum CodingKeys: String, CodingKey {
         case temp
         case feelsLike = "feels_like"
@@ -48,15 +29,47 @@ struct MainWeatherInformation: Codable {
 }
 
 // MARK: - Weather
-struct Weather: Codable {
-    let identifire: Int
-    let weatherDescription: Description
-    let icon: String
-
+@objcMembers class Weather: Object, Decodable {
+    dynamic var identifire: Int = 0
+    dynamic var icon: String?
+    @objc private dynamic var weatherDescriptionRawValue: String?
+    
+    var weatherDescription: Description? {
+        guard let descriptionRawValue = weatherDescriptionRawValue else { return nil }
+        return Description(rawValue: descriptionRawValue)
+    }
+    
     enum CodingKeys: String, CodingKey {
         case weatherDescription = "description"
         case icon
         case identifire = "id"
+    }
+    
+    init(identifire: Int, weatherDescription: Description? = nil, icon: String) {
+        self.identifire = identifire
+        self.weatherDescriptionRawValue = weatherDescription?.rawValue
+        self.icon = icon
+    }
+    
+    required init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        identifire = try container.decode(Int.self, forKey: .identifire)
+        weatherDescriptionRawValue = try? container.decode(Description.self, forKey: .weatherDescription).rawValue
+        icon = try? container.decode(String.self, forKey: .icon)
+        
+        super.init()
+    }
+    
+    required override init() {
+        super.init()
+    }
+    
+    required init(value: Any, schema: RLMSchema) {
+        super.init()
+    }
+    
+    required init(realm: RLMRealm, schema: RLMObjectSchema) {
+        super.init()
     }
 }
 

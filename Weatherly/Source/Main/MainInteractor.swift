@@ -24,7 +24,6 @@ class MainInteractor: MainInteractorType {
     
     private let weatherService = WeatherService()
     private let realmManager = RealmManager.shared
-    private var hourlyEntity: HourlyEntity?
     private var notificationToken: NotificationToken?
     
     // MARK: - Protocol property
@@ -37,14 +36,21 @@ class MainInteractor: MainInteractorType {
     }
     
     var hourCellModels: [HourCellModel] {
-        guard let hours = hourlyEntity?.hourly else { return [] }
+        guard let hoursList = hourlyEntity?.hourly else { return [] }
         
+        let hours = Array(hoursList)
         let hoursInDay = 24
         return hours.count >= hoursInDay ? Array(hours[0..<hoursInDay]) : hours
     }
     
     var dayCellModels: [DayCellModel] {
-        return hourlyEntity?.daily ?? []
+        guard let daysList = hourlyEntity?.daily else { return [] }
+        
+        return Array(daysList)
+    }
+    
+    private var hourlyEntity: HourlyEntity? {
+        return realmManager.getObject(primaryKey: RealmKeyConstants.hourlyEntityId)
     }
     
     // MARK: - Protocol methods
@@ -57,7 +63,7 @@ class MainInteractor: MainInteractorType {
             
             switch result {
             case .success(let hourlyEntity):
-                self.hourlyEntity = hourlyEntity
+                self.realmManager.addOrUpdate(object: hourlyEntity)
                 completion(.success(true))
             case .failure(let error):
                 completion(.failure(error))

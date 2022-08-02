@@ -42,11 +42,6 @@ class MainViewController: UIViewController {
 extension MainViewController: MainViewType {
     func updateUI() {
         setupUI()
-        timeLabel.text = presenter?.time
-        weatherImageView.image = presenter?.weatherIcon
-        temperatureLabel.text = presenter?.temperature
-        humidityLabel.text = presenter?.humidity
-        windSpeedLabel.text = presenter?.windSpeed
         tableView.reloadData()
     }
 }
@@ -103,6 +98,11 @@ private extension MainViewController {
     
     func setupUI() {
         setupNavigation(title: presenter?.title)
+        timeLabel.text = presenter?.time
+        weatherImageView.image = presenter?.weatherIcon
+        temperatureLabel.text = presenter?.temperature
+        humidityLabel.text = presenter?.humidity
+        windSpeedLabel.text = presenter?.windSpeed
     }
     
     func subscribeNotifications() {

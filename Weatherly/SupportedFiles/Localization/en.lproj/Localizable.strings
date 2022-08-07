@@ -10,6 +10,8 @@
 "temperature" = "temperature";
 "humidity" = "humidity";
 "windSpeed" = "wind speed";
+"pressure" = "mm Hg";
+"km" = "km";
 
 // MARK: - Map
 "map.title" = "Map";

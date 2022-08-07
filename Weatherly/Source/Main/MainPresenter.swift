@@ -24,6 +24,7 @@ protocol MainPresenterType {
     func weatherSection(by index: Int) -> WeatherSection
     func numberOfRowsInSection(section: Int) -> Int
     func dayCellModel(at indexPath: IndexPath) -> DayCellModel
+    func descriptionCellModel(at indexPath: IndexPath) -> DescriptionCellModel
     func tableView(heightForRowAt indexPath: IndexPath) -> CGFloat
     func didUpdateLocations(location: Location)
 }
@@ -111,11 +112,17 @@ class MainPresenter: MainPresenterType {
             return interactor.days.count
         case .information:
             return 1
+        case .description:
+            return interactor.descriptions.count
         }
     }
     
     func dayCellModel(at indexPath: IndexPath) -> DayCellModel {
         return interactor.days[indexPath.row]
+    }
+    
+    func descriptionCellModel(at indexPath: IndexPath) -> DescriptionCellModel {
+        return interactor.descriptions[indexPath.row]
     }
     
     func tableView(heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -126,6 +133,8 @@ class MainPresenter: MainPresenterType {
         case .days:
             return 70
         case .information:
+            return 70
+        case .description:
             return 70
         }
     }

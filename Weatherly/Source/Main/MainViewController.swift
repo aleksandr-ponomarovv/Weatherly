@@ -73,6 +73,10 @@ extension MainViewController: UITableViewDataSource {
             let cell = tableView.dequeueReusable(cell: InformationCell.self, for: indexPath)
             cell.title = presenter.informationCellTitle
             return cell
+        case .description:
+            let cell = tableView.dequeueReusable(cell: DescriptionCell.self, for: indexPath)
+            cell.model = presenter.descriptionCellModel(at: indexPath)
+            return cell
         }
     }
 }
@@ -99,6 +103,7 @@ private extension MainViewController {
         tableView.register(cell: HoursCell.self)
         tableView.register(cell: DayCell.self)
         tableView.register(cell: InformationCell.self)
+        tableView.register(cell: DescriptionCell.self)
     }
     
     func setupUI() {

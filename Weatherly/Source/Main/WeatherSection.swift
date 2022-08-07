@@ -11,4 +11,5 @@ enum WeatherSection: CaseIterable {
     case hours
     case days
     case information
+    case description
 }

@@ -14,6 +14,7 @@ protocol MainInteractorType {
     var current: Current? { get }
     var hours: [Hourly] { get }
     var days: [Daily] { get }
+    var descriptions: [DescriptionCellEntity] { get }
     
     func updateWeatherData(completion: @escaping(Responce<Bool>) -> Void)
     func save(location: Location)
@@ -28,7 +29,7 @@ class MainInteractor: MainInteractorType {
     
     // MARK: - Protocol property
     var selectedLocation: Location? {
-        return realmManager.getObject(primaryKey: RealmKeyConstants.locationId)
+        realmManager.getObject(primaryKey: RealmKeyConstants.locationId)
     }
     
     var current: Current? {
@@ -47,6 +48,10 @@ class MainInteractor: MainInteractorType {
         guard let daysList = hourlyEntity?.daily else { return [] }
         
         return Array(daysList)
+    }
+    
+    var descriptions: [DescriptionCellEntity] {
+        getDescriptions()
     }
     
     private var hourlyEntity: HourlyEntity? {
@@ -77,5 +82,35 @@ class MainInteractor: MainInteractorType {
     
     func subscribeLocationNotification(completion: @escaping(RealmCollectionChange<Results<Location>>) -> Void) {
         notificationToken = realmManager.observeUpdateChanges(type: Location.self, completion)
+    }
+}
+
+// MARK: - Private methods
+private extension MainInteractor {
+    func getDescriptions() -> [DescriptionCellEntity] {
+        let descriptions: [DescriptionCellEntity] = DescriptionSection.allCases.compactMap { descriptionSection in
+            guard let current = current else { return nil }
+            
+            let title = descriptionSection.rawValue
+            switch descriptionSection {
+            case .sunrise:
+                return DescriptionCellEntity(title: title, value: current.sunrise.toCalendarDate())
+            case .sunset:
+                return DescriptionCellEntity(title: title, value: current.sunrise.toCalendarDate())
+            case .humidity:
+                return DescriptionCellEntity(title: title, value: current.humidity.toPercentHumidity())
+            case .wind:
+                return DescriptionCellEntity(title: title, value: current.windSpeed.toSpeed())
+            case .feelsLike:
+                return DescriptionCellEntity(title: title, value: current.feelsLike.toTemperature())
+            case .ressure:
+                return DescriptionCellEntity(title: title, value: current.pressure.toPressure())
+            case .visibility:
+                return DescriptionCellEntity(title: title, value: current.visibility.toVisibility())
+            case .uvIndex:
+                return DescriptionCellEntity(title: title, value: String(current.uvi))
+            }
+        }
+        return descriptions
     }
 }

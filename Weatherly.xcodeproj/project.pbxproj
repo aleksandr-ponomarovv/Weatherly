@@ -25,6 +25,9 @@
 		1F3B31BC288E1AE100866FB4 /* SearchLocationViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1F3B31B5288E1AE100866FB4 /* SearchLocationViewController.xib */; };
 		1F3B31C3288E220300866FB4 /* TextCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F3B31C1288E220300866FB4 /* TextCell.swift */; };
 		1F3B31C4288E220300866FB4 /* TextCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1F3B31C2288E220300866FB4 /* TextCell.xib */; };
+		1F4029CB289F409E002C227B /* DescriptionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F4029C9289F409E002C227B /* DescriptionCell.swift */; };
+		1F4029CC289F409E002C227B /* DescriptionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1F4029CA289F409E002C227B /* DescriptionCell.xib */; };
+		1F4029CE289F4CBC002C227B /* DescriptionCellEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F4029CD289F4CBC002C227B /* DescriptionCellEntity.swift */; };
 		1F4E9087288D66B3003B609E /* Int+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F4E9086288D66B3003B609E /* Int+Extension.swift */; };
 		1F5A6A3E288DB64E00E35367 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 1F5A6A3C288DB64E00E35367 /* Localizable.strings */; };
 		1F5A6A40288DDABC00E35367 /* UIViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F5A6A3F288DDABC00E35367 /* UIViewController+Extension.swift */; };
@@ -92,6 +95,9 @@
 		1F3B31B5288E1AE100866FB4 /* SearchLocationViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SearchLocationViewController.xib; sourceTree = "<group>"; };
 		1F3B31C1288E220300866FB4 /* TextCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextCell.swift; sourceTree = "<group>"; };
 		1F3B31C2288E220300866FB4 /* TextCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TextCell.xib; sourceTree = "<group>"; };
+		1F4029C9289F409E002C227B /* DescriptionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DescriptionCell.swift; sourceTree = "<group>"; };
+		1F4029CA289F409E002C227B /* DescriptionCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DescriptionCell.xib; sourceTree = "<group>"; };
+		1F4029CD289F4CBC002C227B /* DescriptionCellEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DescriptionCellEntity.swift; sourceTree = "<group>"; };
 		1F4E9086288D66B3003B609E /* Int+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Int+Extension.swift"; sourceTree = "<group>"; };
 		1F5A6A3D288DB64E00E35367 /* uk */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = uk; path = Localizable.strings; sourceTree = "<group>"; };
 		1F5A6A3F288DDABC00E35367 /* UIViewController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extension.swift"; sourceTree = "<group>"; };
@@ -201,6 +207,15 @@
 			path = TextCell;
 			sourceTree = "<group>";
 		};
+		1F4029C8289F4072002C227B /* DescriptionCell */ = {
+			isa = PBXGroup;
+			children = (
+				1F4029CA289F409E002C227B /* DescriptionCell.xib */,
+				1F4029C9289F409E002C227B /* DescriptionCell.swift */,
+			);
+			path = DescriptionCell;
+			sourceTree = "<group>";
+		};
 		1F5A6A3B288DB64E00E35367 /* uk.lproj */ = {
 			isa = PBXGroup;
 			children = (
@@ -233,6 +248,7 @@
 			children = (
 				1FFBCD73288B645700130C2E /* FiveDaysEntity.swift */,
 				1FA72965288CB2F4009C1043 /* HourlyEntity.swift */,
+				1F4029CD289F4CBC002C227B /* DescriptionCellEntity.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -432,6 +448,7 @@
 				1FA72968288CB85C009C1043 /* HoursCell */,
 				1FA72967288CB84F009C1043 /* DayCell */,
 				1F647161289DE94B0020AF44 /* InformationCell */,
+				1F4029C8289F4072002C227B /* DescriptionCell */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -525,6 +542,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1F4029CC289F409E002C227B /* DescriptionCell.xib in Resources */,
 				1FEB933C288A11F400957C99 /* DayCell.xib in Resources */,
 				1F15ADCD28949BE4002C8363 /* MapViewController.xib in Resources */,
 				1FCD2EE32889BBD000ED722E /* MainViewController.xib in Resources */,
@@ -660,11 +678,13 @@
 				1FCD2EDD2889BBD000ED722E /* AppDelegate.swift in Sources */,
 				1F15ADC828949BE4002C8363 /* MapRouter.swift in Sources */,
 				1FFBCD70288B50E400130C2E /* URLRequestBuilder.swift in Sources */,
+				1F4029CE289F4CBC002C227B /* DescriptionCellEntity.swift in Sources */,
 				1F94BCFB288B762500DD3CD4 /* Response.swift in Sources */,
 				1FA72978288CD3A3009C1043 /* Date+Extension.swift in Sources */,
 				1F94BCFE288B793700DD3CD4 /* Data+Extension.swift in Sources */,
 				1F3B31B7288E1AE100866FB4 /* SearchLocationRouter.swift in Sources */,
 				1FCD2EDF2889BBD000ED722E /* SceneDelegate.swift in Sources */,
+				1F4029CB289F409E002C227B /* DescriptionCell.swift in Sources */,
 				1FCD2EF62889BBD000ED722E /* String+Extension.swift in Sources */,
 				1FCD2EEB2889BBD000ED722E /* MainInteractor.swift in Sources */,
 				1FCD2EFB2889BBD000ED722E /* Constants.swift in Sources */,

@@ -10,6 +10,8 @@
 "temperature" = "температура";
 "humidity" = "вологість";
 "windSpeed" = "швидкість вітру";
+"pressure" = "гПа";
+"km" = "км";
 
 // MARK: - Map
 "map.title" = "Мапа";

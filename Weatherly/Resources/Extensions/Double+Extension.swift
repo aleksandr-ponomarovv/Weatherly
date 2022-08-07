@@ -13,6 +13,14 @@ extension Double {
     }
     
     func toSpeed() -> String {
-        return String(format: "%.f", self) + Localizable.metersPerSecond.key.localized()
+        let speed = String(format: "%.f", self)
+        let ending = Localizable.metersPerSecond.key.localized()
+        return "\(speed) \(ending)"
+    }
+    
+    func toVisibility() -> String {
+        let distance = String(format: "%.f", self / 1000)
+        let ending = Localizable.km.key.localized()
+        return "\(distance) \(ending)"
     }
 }

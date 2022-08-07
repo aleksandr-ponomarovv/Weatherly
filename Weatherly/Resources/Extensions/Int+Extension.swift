@@ -12,6 +12,10 @@ extension Int {
         return Date(timeIntervalSince1970: Double(self)).toHours()
     }
     
+    func toHoursWithMinutes() -> String {
+        return Date(timeIntervalSince1970: Double(self)).toHoursWithMinutes()
+    }
+    
     func toDay() -> String {
         return Date(timeIntervalSince1970: Double(self)).toDay()
     }

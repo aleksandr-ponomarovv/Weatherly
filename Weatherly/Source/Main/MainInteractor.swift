@@ -94,9 +94,9 @@ private extension MainInteractor {
             let title = descriptionSection.rawValue
             switch descriptionSection {
             case .sunrise:
-                return DescriptionCellEntity(title: title, value: current.sunrise.toCalendarDate())
+                return DescriptionCellEntity(title: title, value: current.sunrise.toHoursWithMinutes())
             case .sunset:
-                return DescriptionCellEntity(title: title, value: current.sunrise.toCalendarDate())
+                return DescriptionCellEntity(title: title, value: current.sunset.toHoursWithMinutes())
             case .humidity:
                 return DescriptionCellEntity(title: title, value: current.humidity.toPercentHumidity())
             case .wind:

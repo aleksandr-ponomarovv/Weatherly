@@ -8,13 +8,12 @@
 import UIKit
 
 protocol MainPresenterType {
-    var title: String? { get }
+    var city: String? { get }
+    var weatherDescription: String? { get }
+    var currentTemperature: String { get }
+    var minMaxTemperature: String? { get }
     var numberOfSections: Int { get }
-    var time: String? { get }
-    var weatherIcon: UIImage? { get }
-    var temperature: String { get }
-    var humidity: String { get }
-    var windSpeed: String { get }
+    
     var hourCellModels: [HourCellModel] { get }
     var informationCellTitle: String? { get }
     
@@ -38,28 +37,26 @@ class MainPresenter: MainPresenterType {
     // MARK: - Protocol property
     let numberOfSections: Int = WeatherSection.allCases.count
     
-    var title: String? {
-        return interactor.selectedLocation?.name
+    var city: String? {
+        interactor.selectedLocation?.name
     }
     
-    var time: String? {
-        interactor.current?.time
+    var weatherDescription: String? {
+        interactor.current?.weather.first?.weatherDescription?.rawValue
     }
     
-    var weatherIcon: UIImage? {
-        interactor.current?.icon
-    }
-    
-    var temperature: String {
+    var currentTemperature: String {
         interactor.current?.temperature ?? Localizable.temperature.key.localized()
     }
     
-    var humidity: String {
-        interactor.current?.percentHumidity ?? Localizable.humidity.key.localized()
-    }
-    
-    var windSpeed: String {
-        interactor.current?.windSpeedMetersPerSecond ?? Localizable.windSpeed.key.localized()
+    var minMaxTemperature: String? {
+        guard let temperature = interactor.days.first?.temp else { return nil }
+        
+        let max = Localizable.max.key.localized().capitalized
+        let min = Localizable.min.key.localized()
+        let maxTemperature = temperature.max.toTemperature()
+        let minTemperature = temperature.min.toTemperature()
+        return "\(max). \(maxTemperature), \(min). \(minTemperature)"
     }
     
     var hourCellModels: [HourCellModel] {

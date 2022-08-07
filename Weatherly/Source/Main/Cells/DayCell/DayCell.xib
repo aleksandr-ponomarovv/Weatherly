@@ -52,6 +52,7 @@
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <connections>
                 <outlet property="dayOfWeekLabel" destination="ih9-4p-hx9" id="wd7-bM-Eb3"/>
                 <outlet property="temperatureLabel" destination="ln2-7x-Zu4" id="gEx-vg-fF1"/>

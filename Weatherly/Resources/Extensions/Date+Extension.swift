@@ -12,6 +12,10 @@ extension Date {
         return date(format: "HH")
     }
     
+    func toHoursWithMinutes() -> String {
+        return date(format: "HH:mm")
+    }
+    
     func toDay() -> String {
         return date(format: "EE")
     }

@@ -12,6 +12,8 @@
 "windSpeed" = "швидкість вітру";
 "pressure" = "гПа";
 "km" = "км";
+"max" = "макс";
+"min" = "мін";
 
 // MARK: - Map
 "map.title" = "Мапа";

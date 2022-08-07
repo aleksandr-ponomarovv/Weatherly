@@ -14,11 +14,10 @@ protocol MainViewType: AnyObject {
 
 class MainViewController: UIViewController {
     
-    @IBOutlet private weak var timeLabel: UILabel!
-    @IBOutlet private weak var weatherImageView: UIImageView!
-    @IBOutlet private weak var temperatureLabel: UILabel!
-    @IBOutlet private weak var humidityLabel: UILabel!
-    @IBOutlet private weak var windSpeedLabel: UILabel!
+    @IBOutlet private weak var cityLabel: UILabel!
+    @IBOutlet private weak var weatherDescriptionLabel: UILabel!
+    @IBOutlet private weak var currentTemperatureLabel: UILabel!
+    @IBOutlet private weak var minMaxTemperatureLabel: UILabel!
     @IBOutlet private weak var forecastView: UIView!
     
     @IBOutlet private weak var tableView: UITableView!
@@ -107,12 +106,10 @@ private extension MainViewController {
     }
     
     func setupUI() {
-        setupNavigation(title: presenter?.title)
-        timeLabel.text = presenter?.time
-        weatherImageView.image = presenter?.weatherIcon
-        temperatureLabel.text = presenter?.temperature
-        humidityLabel.text = presenter?.humidity
-        windSpeedLabel.text = presenter?.windSpeed
+        cityLabel.text = presenter?.city
+        weatherDescriptionLabel.text = presenter?.weatherDescription
+        currentTemperatureLabel.text = presenter?.currentTemperature
+        minMaxTemperatureLabel.text = presenter?.minMaxTemperature
     }
     
     func subscribeNotifications() {

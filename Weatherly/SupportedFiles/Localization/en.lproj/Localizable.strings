@@ -12,6 +12,8 @@
 "windSpeed" = "wind speed";
 "pressure" = "mm Hg";
 "km" = "km";
+"max" = "max";
+"min" = "min";
 
 // MARK: - Map
 "map.title" = "Map";

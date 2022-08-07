@@ -67,7 +67,11 @@ extension MainViewController: UITableViewDataSource {
             return cell
         case .days:
             let cell = tableView.dequeueReusable(cell: DayCell.self, for: indexPath)
-            cell.model = presenter.getDayCellModel(at: indexPath)
+            cell.model = presenter.dayCellModel(at: indexPath)
+            return cell
+        case .information:
+            let cell = tableView.dequeueReusable(cell: InformationCell.self, for: indexPath)
+            cell.title = presenter.informationCellTitle
             return cell
         }
     }
@@ -94,6 +98,7 @@ private extension MainViewController {
         tableView.delegate = self
         tableView.register(cell: HoursCell.self)
         tableView.register(cell: DayCell.self)
+        tableView.register(cell: InformationCell.self)
     }
     
     func setupUI() {

@@ -11,9 +11,9 @@ import RealmSwift
 
 protocol MainInteractorType {
     var selectedLocation: Location? { get }
-    var current: CurrentModel? { get }
-    var hourCellModels: [HourCellModel] { get }
-    var dayCellModels: [DayCellModel] { get }
+    var current: Current? { get }
+    var hours: [Hourly] { get }
+    var days: [Daily] { get }
     
     func updateWeatherData(completion: @escaping(Responce<Bool>) -> Void)
     func save(location: Location)
@@ -31,11 +31,11 @@ class MainInteractor: MainInteractorType {
         return realmManager.getObject(primaryKey: RealmKeyConstants.locationId)
     }
     
-    var current: CurrentModel? {
+    var current: Current? {
         hourlyEntity?.current
     }
     
-    var hourCellModels: [HourCellModel] {
+    var hours: [Hourly] {
         guard let hoursList = hourlyEntity?.hourly else { return [] }
         
         let hours = Array(hoursList)
@@ -43,7 +43,7 @@ class MainInteractor: MainInteractorType {
         return hours.count >= hoursInDay ? Array(hours[0..<hoursInDay]) : hours
     }
     
-    var dayCellModels: [DayCellModel] {
+    var days: [Daily] {
         guard let daysList = hourlyEntity?.daily else { return [] }
         
         return Array(daysList)

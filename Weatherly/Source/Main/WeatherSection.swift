@@ -10,4 +10,5 @@ import Foundation
 enum WeatherSection: CaseIterable {
     case hours
     case days
+    case information
 }

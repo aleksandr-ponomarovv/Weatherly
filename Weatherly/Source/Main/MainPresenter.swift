@@ -16,13 +16,14 @@ protocol MainPresenterType {
     var humidity: String { get }
     var windSpeed: String { get }
     var hourCellModels: [HourCellModel] { get }
+    var informationCellTitle: String? { get }
     
     func viewDidLoad()
     func didTapNavigationLeftButton()
     func didTapNavigationRightButton()
     func weatherSection(by index: Int) -> WeatherSection
     func numberOfRowsInSection(section: Int) -> Int
-    func getDayCellModel(at indexPath: IndexPath) -> DayCellModel
+    func dayCellModel(at indexPath: IndexPath) -> DayCellModel
     func tableView(heightForRowAt indexPath: IndexPath) -> CGFloat
     func didUpdateLocations(location: Location)
 }
@@ -34,7 +35,7 @@ class MainPresenter: MainPresenterType {
     private weak var view: MainViewType?
     
     // MARK: - Protocol property
-    let numberOfSections: Int = 2
+    let numberOfSections: Int = WeatherSection.allCases.count
     
     var title: String? {
         return interactor.selectedLocation?.name
@@ -61,7 +62,18 @@ class MainPresenter: MainPresenterType {
     }
     
     var hourCellModels: [HourCellModel] {
-        interactor.hourCellModels
+        interactor.hours
+    }
+    
+    var informationCellTitle: String? {
+        guard let current = interactor.current,
+              let weather = current.weather.first,
+              let description = weather.weatherDescription?.rawValue,
+              let temperature = interactor.days.first?.temp else { return nil }
+        
+        let firstSentence = "Today: \(description)."
+        let secondSentence = "Air temperature \(current.temperature), max temperature \(temperature.max.toTemperature())"
+        return "\(firstSentence) \(secondSentence)"
     }
     
     init(interactor: MainInteractorType,
@@ -96,12 +108,14 @@ class MainPresenter: MainPresenterType {
         case .hours:
             return 1
         case .days:
-            return interactor.dayCellModels.count
+            return interactor.days.count
+        case .information:
+            return 1
         }
     }
     
-    func getDayCellModel(at indexPath: IndexPath) -> DayCellModel {
-        return interactor.dayCellModels[indexPath.row]
+    func dayCellModel(at indexPath: IndexPath) -> DayCellModel {
+        return interactor.days[indexPath.row]
     }
     
     func tableView(heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -110,6 +124,8 @@ class MainPresenter: MainPresenterType {
         case .hours:
             return 140
         case .days:
+            return 70
+        case .information:
             return 70
         }
     }

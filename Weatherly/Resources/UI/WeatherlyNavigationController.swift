@@ -16,7 +16,7 @@ class WeatherlyNavigationController: UINavigationController {
     override init(rootViewController: UIViewController) {
         super.init(rootViewController: rootViewController)
         
-        configureUI(rootViewController: rootViewController)
+        configureUI()
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -33,7 +33,7 @@ class WeatherlyNavigationController: UINavigationController {
 
 // MARK: - Private methods
 private extension WeatherlyNavigationController {
-    func configureUI(rootViewController: UIViewController) {
+    func configureUI() {
         let appearance = UINavigationBarAppearance()
         appearance.configureWithTransparentBackground()
         appearance.backgroundColor = R.color.navigation_bg()

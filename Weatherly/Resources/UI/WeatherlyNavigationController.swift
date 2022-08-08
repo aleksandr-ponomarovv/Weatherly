@@ -24,10 +24,9 @@ class WeatherlyNavigationController: UINavigationController {
     }
     
     override func pushViewController(_ viewController: UIViewController, animated: Bool) {
-        let pushingVC = viewControllers.last
         let backItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
         backItem.tintColor = R.color.navigation_button()
-        pushingVC?.navigationItem.backBarButtonItem = backItem
+        viewController.navigationItem.backBarButtonItem = backItem
         super.pushViewController(viewController, animated: animated)
     }
 }

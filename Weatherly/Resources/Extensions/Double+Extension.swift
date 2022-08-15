@@ -9,11 +9,11 @@ import Foundation
 
 extension Double {
     func toTemperature() -> String {
-        return String(format: "%.f", self) + "°"
+        return toIntegerString() + "°"
     }
     
     func toSpeed() -> String {
-        let speed = String(format: "%.f", self)
+        let speed = toIntegerString()
         let ending = Localizable.metersPerSecond.key.localized()
         return "\(speed) \(ending)"
     }
@@ -22,5 +22,9 @@ extension Double {
         let distance = String(format: "%.f", self / 1000)
         let ending = Localizable.km.key.localized()
         return "\(distance) \(ending)"
+    }
+    
+    func toIntegerString() -> String {
+        return String(format: "%.f", self)
     }
 }

@@ -46,7 +46,9 @@ class MainPresenter: MainPresenterType {
     }
     
     var currentTemperature: String {
-        interactor.current?.temperature ?? Localizable.temperature.key.localized()
+        guard let current = interactor.current else { return Localizable.temperature.key.localized() }
+        
+        return current.temp.toIntegerString()
     }
     
     var minMaxTemperature: String? {

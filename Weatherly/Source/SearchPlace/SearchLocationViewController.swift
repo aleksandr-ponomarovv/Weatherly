@@ -65,7 +65,7 @@ extension SearchLocationViewController: UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return presenter?.locationCellHeight ?? 0
+        return 50
     }
 }
 
@@ -98,10 +98,8 @@ private extension SearchLocationViewController {
     @objc func localizeUI() {
         navigationTextField.placeholder = Localizable.searchPlaceNavigationTextFieldPlaceholder.key.localized()
     }
-}
-
-// MARK: - Private navigation methods
-private extension SearchLocationViewController {
+    
+    // MARK: - Navigation
     func setupNavigationTextField() {
         setupNavigationTitleView(textField: navigationTextField)
     }

@@ -8,12 +8,9 @@
 import UIKit
 
 protocol MainPresenterType {
-    var city: String? { get }
-    var weatherDescription: String? { get }
-    var currentTemperature: String { get }
-    var minMaxTemperature: String? { get }
-    var numberOfSections: Int { get }
+    var model: MainEntityProtocol { get }
     
+    var numberOfSections: Int { get }
     var hourCellModels: [HourCellModel] { get }
     var informationCellTitle: String? { get }
     
@@ -24,7 +21,6 @@ protocol MainPresenterType {
     func numberOfRowsInSection(section: Int) -> Int
     func dayCellModel(at indexPath: IndexPath) -> DayCellModel
     func descriptionCellModel(at indexPath: IndexPath) -> DescriptionCellModel
-    func tableView(heightForRowAt indexPath: IndexPath) -> CGFloat
     func didUpdateLocations(location: Location)
 }
 
@@ -37,28 +33,15 @@ class MainPresenter: MainPresenterType {
     // MARK: - Protocol property
     let numberOfSections: Int = WeatherSection.allCases.count
     
-    var city: String? {
-        interactor.selectedLocation?.name
-    }
-    
-    var weatherDescription: String? {
-        interactor.current?.weather.first?.weatherDescription?.rawValue
-    }
-    
-    var currentTemperature: String {
-        guard let current = interactor.current else { return Localizable.temperature.key.localized() }
-        
-        return current.temp.toIntegerString()
-    }
-    
-    var minMaxTemperature: String? {
-        guard let temperature = interactor.days.first?.temp else { return nil }
-        
-        let max = Localizable.max.key.localized().capitalized
-        let min = Localizable.min.key.localized()
-        let maxTemperature = temperature.max.toTemperature()
-        let minTemperature = temperature.min.toTemperature()
-        return "\(max). \(maxTemperature), \(min). \(minTemperature)"
+    var model: MainEntityProtocol {
+        let city = interactor.selectedLocation?.name
+        let weatherDescription = interactor.current?.weather.first?.weatherDescription?.rawValue
+        let currentTemperature = interactor.current?.temp.toIntegerString() ?? "--"
+        let todatTemp: Temp? = interactor.days.first?.temp
+        return MainEntity(city: city,
+                          weatherDescription: weatherDescription,
+                          currentTemperature: currentTemperature,
+                          todayTemp: todatTemp)
     }
     
     var hourCellModels: [HourCellModel] {
@@ -122,20 +105,6 @@ class MainPresenter: MainPresenterType {
     
     func descriptionCellModel(at indexPath: IndexPath) -> DescriptionCellModel {
         return interactor.descriptions[indexPath.row]
-    }
-    
-    func tableView(heightForRowAt indexPath: IndexPath) -> CGFloat {
-        let weatherSection = weatherSection(by: indexPath.section)
-        switch weatherSection {
-        case .hours:
-            return 140
-        case .days:
-            return 70
-        case .information:
-            return 70
-        case .description:
-            return 70
-        }
     }
     
     func didUpdateLocations(location: Location) {

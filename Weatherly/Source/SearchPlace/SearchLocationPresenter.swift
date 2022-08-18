@@ -9,7 +9,6 @@ import UIKit
 
 protocol SearchLocationPresenterType {
     var numberOfRowsInSection: Int { get }
-    var locationCellHeight: CGFloat { get }
     
     func findLocations(text: String?)
     func getLocationTitle(at indexPath: IndexPath) -> String?
@@ -25,10 +24,6 @@ class SearchLocationPresenter: SearchLocationPresenterType {
     // MARK: - Protocol property
     var numberOfRowsInSection: Int {
         interactor.locations.count
-    }
-    
-    var locationCellHeight: CGFloat {
-        50
     }
     
     init(interactor: SearchLocationInteractorType,

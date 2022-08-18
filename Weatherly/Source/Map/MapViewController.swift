@@ -75,10 +75,8 @@ private extension MapViewController {
     @objc func localizeUI() {
         title = Localizable.mapTitle.key.localized()
     }
-}
 
-// MARK: - Private navigation methods
-private extension MapViewController {
+    // MARK: - Navigation
     func setupNavigationBar() {
         guard let rightButtonImage = R.image.ic_my_location() else { return }
         
@@ -88,10 +86,8 @@ private extension MapViewController {
     @objc func navigationRightButtonAction() {
         presenter?.didTapNavigationRightButton()
     }
-}
-
-// MARK: - Private map methods
-private extension MapViewController {
+    
+    // MARK: - Map
     func setupMapView() {
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(didTapOnMap))
         mapView.addGestureRecognizer(tapGesture)

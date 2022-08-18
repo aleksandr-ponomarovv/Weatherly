@@ -7,6 +7,34 @@
 
 import Foundation
 
-struct MainEntity: Codable {
+protocol MainEntityProtocol {
+    var city: String? { get }
+    var weatherDescription: String? { get }
+    var currentTemperature: String { get }
+    var minMaxTemperature: String? { get }
+}
 
+struct MainEntity: MainEntityProtocol, Codable {
+    let city: String?
+    let weatherDescription: String?
+    let currentTemperature: String
+    
+    private let todayTemp: Temp?
+    
+    var minMaxTemperature: String? {
+        guard let temperature = todayTemp else { return nil }
+        
+        let max = Localizable.max.key.localized().capitalized
+        let min = Localizable.min.key.localized()
+        let maxTemperature = temperature.max.toTemperature()
+        let minTemperature = temperature.min.toTemperature()
+        return "\(max). \(maxTemperature), \(min). \(minTemperature)"
+    }
+    
+    init(city: String?, weatherDescription: String?, currentTemperature: String, todayTemp: Temp?) {
+        self.city = city
+        self.weatherDescription = weatherDescription
+        self.currentTemperature = currentTemperature
+        self.todayTemp = todayTemp
+    }
 }

@@ -29,7 +29,6 @@ class MainViewController: UIViewController {
         
         presenter?.viewDidLoad()
         configureUI()
-        subscribeNotifications()
     }
     
     deinit {
@@ -83,14 +82,25 @@ extension MainViewController: UITableViewDataSource {
 // MARK: - UITableViewDelegate
 extension MainViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return presenter?.tableView(heightForRowAt: indexPath) ?? 0
+        guard let presenter = presenter else { return 0 }
+    
+        let weatherSection = presenter.weatherSection(by: indexPath.section)
+        switch weatherSection {
+        case .hours:
+            return 140
+        case .days:
+            return 70
+        case .information:
+            return 70
+        case .description:
+            return 70
+        }
     }
 }
 
 // MARK: - Private methods
 private extension MainViewController {
     func configureUI() {
-        localizeUI()
         setupNavigationBar()
         setupTableView()
         setupUI()
@@ -106,23 +116,15 @@ private extension MainViewController {
     }
     
     func setupUI() {
-        cityLabel.text = presenter?.city
-        weatherDescriptionLabel.text = presenter?.weatherDescription
-        currentTemperatureLabel.text = presenter?.currentTemperature
-        minMaxTemperatureLabel.text = presenter?.minMaxTemperature
-    }
-    
-    func subscribeNotifications() {
-        NotificationCenter.default.addObserver(self, selector: #selector(localizeUI), name: .languageChange, object: nil)
-    }
-    
-    @objc func localizeUI() {
+        guard let model = presenter?.model else { return }
         
+        cityLabel.text = model.city
+        weatherDescriptionLabel.text = model.weatherDescription
+        currentTemperatureLabel.text = model.currentTemperature
+        minMaxTemperatureLabel.text = model.minMaxTemperature
     }
-}
 
-// MARK: - Private navigation methods
-private extension MainViewController {
+    // MARK: - Navigation
     func setupNavigationBar() {
         guard let rightButtonImage = R.image.ic_my_location(),
               let leftButtonImage = R.image.ic_place() else { return }

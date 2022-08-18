@@ -30,10 +30,6 @@ class MainViewController: UIViewController {
         presenter?.viewDidLoad()
         configureUI()
     }
-    
-    deinit {
-        NotificationCenter.default.removeObserver(self)
-    }
 }
 
 // MARK: - MainViewType

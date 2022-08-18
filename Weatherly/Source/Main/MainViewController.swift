@@ -117,7 +117,7 @@ private extension MainViewController {
         cityLabel.text = model.city
         weatherDescriptionLabel.text = model.weatherDescription
         currentTemperatureLabel.text = model.currentTemperature
-        minMaxTemperatureLabel.text = model.minMaxTemperature
+        minMaxTemperatureLabel.text = model.getMinMaxTemperature()
     }
 
     // MARK: - Navigation

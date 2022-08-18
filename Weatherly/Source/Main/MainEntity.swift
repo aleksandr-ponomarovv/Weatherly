@@ -11,7 +11,8 @@ protocol MainEntityProtocol {
     var city: String? { get }
     var weatherDescription: String? { get }
     var currentTemperature: String { get }
-    var minMaxTemperature: String? { get }
+    
+    func getMinMaxTemperature() -> String?
 }
 
 struct MainEntity: MainEntityProtocol, Codable {
@@ -21,7 +22,14 @@ struct MainEntity: MainEntityProtocol, Codable {
     
     private let todayTemp: Temp?
     
-    var minMaxTemperature: String? {
+    init(city: String?, weatherDescription: String?, currentTemperature: String, todayTemp: Temp?) {
+        self.city = city
+        self.weatherDescription = weatherDescription
+        self.currentTemperature = currentTemperature
+        self.todayTemp = todayTemp
+    }
+    
+    func getMinMaxTemperature() -> String? {
         guard let temperature = todayTemp else { return nil }
         
         let max = Localizable.max.key.localized().capitalized
@@ -29,12 +37,5 @@ struct MainEntity: MainEntityProtocol, Codable {
         let maxTemperature = temperature.max.toTemperature()
         let minTemperature = temperature.min.toTemperature()
         return "\(max). \(maxTemperature), \(min). \(minTemperature)"
-    }
-    
-    init(city: String?, weatherDescription: String?, currentTemperature: String, todayTemp: Temp?) {
-        self.city = city
-        self.weatherDescription = weatherDescription
-        self.currentTemperature = currentTemperature
-        self.todayTemp = todayTemp
     }
 }

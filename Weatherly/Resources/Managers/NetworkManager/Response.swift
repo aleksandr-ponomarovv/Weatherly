@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum Responce<T: Decodable> {
+enum Response<T: Decodable> {
     case success(T)
     case failure(ResponseError)
 }

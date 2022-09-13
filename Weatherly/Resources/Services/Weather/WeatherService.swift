@@ -9,7 +9,7 @@ import Alamofire
 
 final class WeatherService: APIManagerProtocol {
     
-    func getHourly(lat: String, lon: String, completion: @escaping(Responce<HourlyEntity>) -> Void) {
+    func getHourly(lat: String, lon: String, completion: @escaping(Response<HourlyEntity>) -> Void) {
         let api: WeatherApi = .getHourly(lat: lat, lon: lon)
         AF.request(api).responseDecodable(of: HourlyEntity.self) { response in
             print("RESPONSE ENTITY: \(response.data?.json ?? "")")

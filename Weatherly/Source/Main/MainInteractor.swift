@@ -16,7 +16,7 @@ protocol MainInteractorType {
     var days: [Daily] { get }
     var descriptions: [DescriptionCellEntity] { get }
     
-    func updateWeatherData(completion: @escaping(Responce<Bool>) -> Void)
+    func updateWeatherData(completion: @escaping(Response<Bool>) -> Void)
     func save(location: Location)
     func subscribeLocationNotification(completion: @escaping(RealmCollectionChange<Results<Location>>) -> Void)
 }
@@ -59,7 +59,7 @@ class MainInteractor: MainInteractorType {
     }
     
     // MARK: - Protocol methods
-    func updateWeatherData(completion: @escaping(Responce<Bool>) -> Void) {
+    func updateWeatherData(completion: @escaping(Response<Bool>) -> Void) {
         guard let latitude = selectedLocation?.latitude,
               let longitude = selectedLocation?.longitude else { return }
         
